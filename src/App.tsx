@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import logo from './logo.svg'
+import './App.css'
+import Letter, { AccuracyEnum } from './component/Letter'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Letter accuracy={AccuracyEnum.correct} position={0} value='R' />
+      <Letter accuracy={AccuracyEnum.doesNotExist} position={1} value='E' />
+      <Letter accuracy={AccuracyEnum.wrongPosition} position={2} value='A' />
+      <Letter accuracy={AccuracyEnum.wrongPosition} position={2} value='C' />
+      <Letter accuracy={AccuracyEnum.correct} position={2} value='T' />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
