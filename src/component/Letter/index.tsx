@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { StyledLetterButton } from "./index.style"
 
 
@@ -31,6 +31,12 @@ export const Letter = ({position, value, accuracy}:ILetterProps) => {
    const [letterPosition, setLetterPosition] = useState(position)
    const [letterValue, setLetterValue] = useState(value)
    const [letterAccuracy, setLetterAccuracy] = useState(accuracy)
+
+   useEffect(() => {
+    setLetterValue(value)
+  }, [value])
+  
+  
 
    return (
      <StyledLetterButton accuracy={letterAccuracy}>
