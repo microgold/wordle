@@ -1,16 +1,17 @@
-import React from 'react'
-import logo from './logo.svg'
+import React, { useEffect, useState } from 'react'
 import './App.css'
-import Letter, { AccuracyEnum } from './component/Letter'
+import { Word } from './component/Word'
+import { WordEntry } from './component/WordEntry'
 
 function App() {
+
+  const [wordGuess, setWordGuess] = useState('')
+
+
   return (
     <div>
-      <Letter accuracy={AccuracyEnum.correct} position={0} value='R' />
-      <Letter accuracy={AccuracyEnum.doesNotExist} position={1} value='E' />
-      <Letter accuracy={AccuracyEnum.wrongPosition} position={2} value='A' />
-      <Letter accuracy={AccuracyEnum.wrongPosition} position={2} value='C' />
-      <Letter accuracy={AccuracyEnum.correct} position={2} value='T' />
+      <WordEntry onGuessEntered={(guess) => setWordGuess(guess)} />
+      <Word isWordEvaluated={false} guessWordValue={wordGuess} />
     </div>
   )
 }
