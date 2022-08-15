@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.App-board {
+  margin: 5px; 
+  background: black;
+  height: 400px;
+  width:  300px;
+}

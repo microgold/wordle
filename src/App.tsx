@@ -9,7 +9,7 @@ function App() {
 
 
   return (
-    <div>
+    <div className='App-board'>
       <WordEntry onGuessEntered={(guess) => setWordGuess(guess)} />
       <Word isWordEvaluated={false} guessWordValue={wordGuess} />
     </div>

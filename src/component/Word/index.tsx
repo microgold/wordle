@@ -9,22 +9,27 @@ interface IWordProps {
 
 
 export const Word = ({isWordEvaluated, guessWordValue}: IWordProps) => {
-  const [isEvaluated, setIsEvaluated] = useState(isWordEvaluated)
-  const [guessValue, setGuessValue] = useState(guessWordValue)
+  const [isEvaluated, setIsEvaluated] = useState(false)
+  const [guessValue, setGuessValue] = useState('')
 
-  useEffect(() => {
+useEffect(() => {
     setGuessValue(guessWordValue)},
     [guessWordValue]
 ) 
 
+useEffect(() => {
+    setIsEvaluated(isWordEvaluated)},
+    [isWordEvaluated]
+) 
+
   return (
       // letter rendering goes here
-      <>
+      <div style={{ marginLeft: '15px' }}>
           {
              guessValue.toUpperCase().split('').map( (nextLetter, letterIndex) => {
               return <Letter key = {'letter_' + letterIndex} value = {nextLetter} 
                             accuracy={AccuracyEnum.none} position={letterIndex} />
           })}
-      </>
+      </div>
   );
 }
