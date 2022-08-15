@@ -1,11 +1,12 @@
 import { useState } from "react"
-import { StyledWordEntry } from "./index.style"
+import { StyledEvaluateButton, StyledWordEntry, StyledWordEntryContainer } from "./index.style"
 
 interface IWordEntryProps {
     onGuessEntered(guess: string): void
+    onGuessComplete(): void
 }
 
-export const WordEntry = ({onGuessEntered} : IWordEntryProps) => {
+export const WordEntry = ({onGuessEntered, onGuessComplete} : IWordEntryProps) => {
 
   const [value, setValue] = useState('')
 
@@ -23,8 +24,13 @@ export const WordEntry = ({onGuessEntered} : IWordEntryProps) => {
   }
 
   return (
-    <StyledWordEntry autoFocus placeholder='Enter your guess...' value={value} 
-       maxLength={5} onChange={(e) => handleLetterEntry(e)}    
-    />
+    <StyledWordEntryContainer>
+        <StyledWordEntry autoFocus placeholder='Enter your guess...' value={value} 
+        maxLength={5} onChange={(e) => handleLetterEntry(e)}    
+        />
+        <StyledEvaluateButton onClick={onGuessComplete}>
+            Guess
+        </StyledEvaluateButton>
+    </StyledWordEntryContainer>
   )
 }
