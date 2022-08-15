@@ -38,7 +38,7 @@ export const evaluateWordScore = (guess: string, answer: string) : AccuracyEnum[
           const firstPositionInAnswer = mask.indexOf(guessLetter)
           mask = replaceAt(mask, firstPositionInAnswer, '_')
         } else if (mask[index] !== '_') {
-            result[index] = AccuracyEnum.doesNotExist            a
+            result[index] = AccuracyEnum.doesNotExist
         }
     })    
 
