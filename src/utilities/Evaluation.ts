@@ -13,7 +13,7 @@ export const evaluateWordScore = (guess: string, answer: string) : AccuracyEnum[
   
     // declare a mask to use record when a letter position is accounted for. initially its equal to the answer string
     let mask = answer
-    let result = new Array(5)
+    let result = [AccuracyEnum.doesNotExist, AccuracyEnum.doesNotExist, AccuracyEnum.doesNotExist, AccuracyEnum.doesNotExist, AccuracyEnum.doesNotExist]
     // first go through each letter in the guess and compare to see if its in the letter is in the      
 
     // correct position, if it is, add it to its appropriate result position, and mark it complete in the mask
@@ -37,9 +37,7 @@ export const evaluateWordScore = (guess: string, answer: string) : AccuracyEnum[
           result[index] = AccuracyEnum.wrongPosition
           const firstPositionInAnswer = mask.indexOf(guessLetter)
           mask = replaceAt(mask, firstPositionInAnswer, '_')
-        } else if (mask[index] !== '_') {
-            result[index] = AccuracyEnum.doesNotExist
-        }
+        } 
     })    
 
     return result
