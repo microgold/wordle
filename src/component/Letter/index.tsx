@@ -28,14 +28,13 @@ export interface ILetterProps {
 
 
 export const Letter = ({position, value, accuracy}:ILetterProps) => {
-   const [letterPosition, setLetterPosition] = useState(position)
-   const [letterValue, setLetterValue] = useState(value)
-   const [letterAccuracy, setLetterAccuracy] = useState(accuracy)
+ 
 
    return (
-     <StyledLetterButton accuracy={letterAccuracy}>
-         {letterValue}
-     </StyledLetterButton>
+  <StyledLetterButton accuracy={accuracy}>
+        {value}
+  </StyledLetterButton>
+
    )
 }
 
