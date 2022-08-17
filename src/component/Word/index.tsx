@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { retrieveAnswer } from '../../utilities/answerRetriever'
 import { evaluateWordScore } from '../../utilities/Evaluation'
 import Letter, { AccuracyEnum } from '../Letter'
 
@@ -6,9 +7,6 @@ interface IWordProps {
     isWordEvaluated: boolean
     guessWordValue: string,
 }
-
-const retrieveAnswer = ():string => { return 'react'}
-
 
 
 export const Word = ({isWordEvaluated, guessWordValue}: IWordProps) => {
@@ -23,18 +21,14 @@ useEffect(() => {
 
   const results = evaluateWordScore(guessValue, retrieveAnswer().toUpperCase())
   setEvaluatedResults(results)
-  setIsEvaluated(true)
+  setIsEvaluated(isWordEvaluated)
 }, [isWordEvaluated])
 
 useEffect(() => {
-    setGuessValue(guessWordValue.padEnd(5,'.'))},
+    setGuessValue(guessWordValue.padEnd(5,'_'))},
     [guessWordValue]
 ) 
 
-useEffect(() => {
-    setIsEvaluated(isWordEvaluated)},
-    [isWordEvaluated]
-) 
 
   return (
       // letter rendering goes here

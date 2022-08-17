@@ -12,6 +12,6 @@ export const StyledLetterButton = styled.button < { accuracy: AccuracyEnum }>`
   color: white;
   font-size: 30px;
   font-weight: bold;
-  border: 2px solid lightgrey;
+  border: 2px solid #787C7F;
   background: ${props => accuracyColorMap.get(props.accuracy)};
   `

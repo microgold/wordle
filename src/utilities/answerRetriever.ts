@@ -1,0 +1,1 @@
+export const retrieveAnswer = ():string => { return 'choir'}

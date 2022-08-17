@@ -13,6 +13,14 @@ export const StyledWordEntry = styled.input `
     box-shadow: 0px 0px 2px blue;
 }
 `
+
+export const StyledBlock = styled.div`
+width: 250px;
+height: 40px;
+text-align: center;
+color: white;
+font-size: 25px;
+`
 export const StyledEvaluateButton = styled.button`
 width: 72px;
 height: 40px;
