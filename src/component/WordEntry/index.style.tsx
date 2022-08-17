@@ -6,11 +6,12 @@ export const StyledWordEntry = styled.input `
   width: 250px;
   height: 30px;
   position: relative;
+  background: black;
   top: 10px;
-  border:2px solid blue;
+  border:2px solid black;
   &:focus {
     outline: none;
-    box-shadow: 0px 0px 2px blue;
+    box-shadow: 0px 0px 2px black;
 }
 `
 
