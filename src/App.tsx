@@ -9,7 +9,7 @@ function App() {
 
   const [wordGuess, setWordGuess] = useState('')
   const [nextGuessPosition, setNextGuessPosition] = useState(0)
-  const [winning, setWinning] = useState(false)
+  const [winning, setWinning] = useState<boolean | null>(null)
   const [gameOver, setGameOver] = useState(false)
   const [gameOverText, setGameOverText] = useState('')
 
@@ -25,18 +25,20 @@ function App() {
 
 
   useEffect(() => {
+    setNextGuessPosition(0) // force it to evaluate the current word
+    setGameOver(true)
+  
     if (winning) {
-      setNextGuessPosition(0) // force it to evaluate the current word
-      setGameOver(true)
       setGameOverText('You Won!!')      
+    }
+    else if (winning === false) {
+      setGameOverText(`Word: ${retrieveAnswer().toUpperCase()}`) // game is over
     }
   }, [winning])
 
   useEffect (() => {
     if (nextGuessPosition === 6) {
-      setNextGuessPosition(0) // force it to evaluate the current word
-      setGameOver(true)
-      setGameOverText(`Word: ${retrieveAnswer().toUpperCase()}`) // game is over
+      setWinning(false)
     }
   }, [nextGuessPosition])
  
