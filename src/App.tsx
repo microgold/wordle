@@ -25,8 +25,10 @@ function App() {
 
 
   useEffect(() => {
+    if (winning != null){    
     setNextGuessPosition(0) // force it to evaluate the current word
     setGameOver(true)
+   }
   
     if (winning) {
       setGameOverText('You Won!!')      
