@@ -13,7 +13,7 @@ interface IGuess {
 
 export const WordBoard = ({guess, currentPosition}:IWordBoardProps) => {
 
-    const initialGuessState = [
+    const initialGuessState : IGuess[] = [
         { guessedWord: '', evaluated: false },
         { guessedWord: '', evaluated: false },
         { guessedWord: '', evaluated: false },
