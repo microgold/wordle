@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './App.css'
 import { WordBoard } from './component/WordBoard'
 import { WordEntry } from './component/WordEntry'
-import { StyledBlock } from './component/WordEntry/index.style'
+import { StyledGameOverDisplay } from './component/WordEntry/index.style'
 import { retrieveAnswer } from './utilities/answerRetriever'
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
  
   return (
     <div className='App-board'>
-      { gameOver ? <StyledBlock>{gameOverText}</StyledBlock> :
+      { gameOver ? <StyledGameOverDisplay>{gameOverText}</StyledGameOverDisplay> :
       <WordEntry onGuessEntered={(guess) => setWordGuess(guess)} 
               onGuessComplete={() => handleGuessCompletion(wordGuess)}  />
       }

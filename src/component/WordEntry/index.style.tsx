@@ -14,20 +14,20 @@ export const StyledWordEntry = styled.input `
     box-shadow: 0px 0px 2px black;
 }
 `
-const breatheAnimation = keyframes`
+const fadeInAnimation = keyframes`
  0% { opacity: 0}
  30% { opacity: 0.3 }
  40% { opacity: 0.6; }
  100% { opacity: 1; }
 `
 
-export const StyledBlock = styled.div`
+export const StyledGameOverDisplay = styled.div`
 width: 250px;
 height: 40px;
 text-align: center;
 color: white;
 font-size: 25px;
-animation-name: ${breatheAnimation};
+animation-name: ${fadeInAnimation};
 animation-duration: 3s;
 animation-iteration-count: 1;
 `
