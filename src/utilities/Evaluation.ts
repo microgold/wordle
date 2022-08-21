@@ -16,12 +16,15 @@ export const evaluateWordScore = (guess: string, answer: string) : AccuracyEnum[
     let result = [AccuracyEnum.doesNotExist, AccuracyEnum.doesNotExist, AccuracyEnum.doesNotExist, AccuracyEnum.doesNotExist, AccuracyEnum.doesNotExist]
     // first go through each letter in the guess and compare to see if its in the letter is in the      
 
-    // correct position, if it is, add it to its appropriate result position, and mark it complete in the mask
+    // correct position, if it is, add it to its appropriate result position, and mark it complete in the mask and
+    // mark it a used index so we don't evaluate it again
 
+    let usedIndeces: number[] = []
     guess.split('').forEach((guessLetter, index) => {
         if (guessLetter === mask[index] ) {
           result[index] = AccuracyEnum.correct
           mask = replaceAt(mask, index, '_')
+          usedIndeces.push(index)
         }
     })
 
@@ -32,8 +35,7 @@ export const evaluateWordScore = (guess: string, answer: string) : AccuracyEnum[
     // else
     // if its not contained,  add the index to the result as doesNotExist
     guess.split('').forEach((guessLetter, index) => {
-
-        if (mask.split('').includes(guessLetter)) {
+        if (!usedIndeces.includes(index) && mask.split('').includes(guessLetter)) {
           result[index] = AccuracyEnum.wrongPosition
           const firstPositionInAnswer = mask.indexOf(guessLetter)
           mask = replaceAt(mask, firstPositionInAnswer, '_')
