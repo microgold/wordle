@@ -10,7 +10,7 @@ test('evaluate wordle all correct', () => {
   expect(result[4]).toBe(AccuracyEnum.correct)
 })
 
-test('evaluate word with 2 sets of 2', () => {
+test('evaluate word with 1 letter in the wrong place and also the right place', () => {
   const result = evaluateWordScore('taste', 'papal')
   expect(result[0]).toBe(AccuracyEnum.doesNotExist)
   expect(result[1]).toBe(AccuracyEnum.correct)
