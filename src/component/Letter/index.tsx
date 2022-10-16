@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { AccuracyEnum } from "../../utilities/accuracy.utils"
-import { StyledLetterButton } from "./index.style"
+import { StyledBlankButton, StyledLetterButton } from "./index.style"
 
 
 
@@ -33,9 +33,10 @@ export const Letter = ({position, value, accuracy}:ILetterProps) => {
   
 
    return (
+      (letterValue === '_' ? <StyledBlankButton>'_'</StyledBlankButton> :
      <StyledLetterButton accuracy={letterAccuracy}>
          {letterValue}
-     </StyledLetterButton>
+     </StyledLetterButton>)
    )
 }
 

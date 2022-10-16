@@ -30,7 +30,7 @@ function App() {
         setWordGuess(wordGuess.substring(0, wordGuess.length - 1))
       }
     }
-    else if (key.toLowerCase() === 'enter') {
+    else if (key.toLowerCase() === 'enter' && wordGuess.length === 5) {
       handleGuessCompletion(wordGuess)    
     } 
     else {
@@ -63,7 +63,7 @@ function App() {
     }
 
     if (gameOver === true) return
-    
+
     setWordGuess('')
   }, [nextGuessPosition])
  

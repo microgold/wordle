@@ -30,7 +30,7 @@ export const VirtualKey = ({value, accuracy, onClickedKey}:IVirtualKeyProps) => 
 
    return (
      <StyledVirtualKeyButton accuracy={letterAccuracy} onClick={() => onClickedKey(letterValue)}>
-         {letterValue}
+         {letterValue} 
      </StyledVirtualKeyButton>
    )
 }
