@@ -38,8 +38,13 @@
 }
 
 .App-board {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   margin: 5px; 
   background: black;
-  height: 400px;
-  width:  400px;
+  height: 700px;
+  width:  950px;
+  justify-content: center;
+  align-items: center;
 }

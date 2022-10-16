@@ -1,4 +1,5 @@
-import { AccuracyEnum } from "../component/Letter";
+import { AccuracyEnum } from "./accuracy.utils"
+
 
 const replaceAt = (source: string, index: number, replacement: string) : string => {
     if (index >= source.length) {

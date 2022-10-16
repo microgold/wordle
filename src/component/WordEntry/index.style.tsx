@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components'
 export const StyledWordEntry = styled.input `
   margin: 15px;
   border-radius: 10px;
-  width: 250px;
+  width: 2px;
   height: 30px;
   position: relative;
   background: black;

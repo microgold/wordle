@@ -1,7 +1,10 @@
+import { wrap } from 'module'
 import { useEffect, useState } from 'react'
+import { AccuracyEnum } from '../../utilities/accuracy.utils'
 import { retrieveAnswer } from '../../utilities/answerRetriever'
 import { evaluateWordScore } from '../../utilities/Evaluation'
-import Letter, { AccuracyEnum } from '../Letter'
+import Letter from '../Letter'
+
 
 interface IWordProps {
     isWordEvaluated: boolean
@@ -32,7 +35,7 @@ useEffect(() => {
 
   return (
       // letter rendering goes here
-      <div style={{ marginLeft: '15px' }}>
+      <div style={{ }}>
           {
              guessValue.toUpperCase().split('').map( (nextLetter, letterIndex) => {
               return <Letter key = {'letter_' + letterIndex} value = {nextLetter} 

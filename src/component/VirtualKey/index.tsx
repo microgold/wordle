@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react"
 import { AccuracyEnum } from "../../utilities/accuracy.utils"
-import { StyledLetterButton } from "./index.style"
+import { StyledVirtualKeyButton } from "./index.style"
 
 
 
 
-export interface ILetterProps {
-    position: number
+export interface IVirtualKeyProps {
     value: string
     accuracy: AccuracyEnum
+    onClickedKey(key: string): void
 }
 
 
 
-export const Letter = ({position, value, accuracy}:ILetterProps) => {
-   const [letterPosition, setLetterPosition] = useState(0)
+export const VirtualKey = ({value, accuracy, onClickedKey}:IVirtualKeyProps) => {
    const [letterValue, setLetterValue] = useState('')
    const [letterAccuracy, setLetterAccuracy] = useState(AccuracyEnum.none)
 
@@ -22,10 +21,7 @@ export const Letter = ({position, value, accuracy}:ILetterProps) => {
     setLetterValue(value)
   }, [value])
 
-  useEffect(() => {
-    setLetterPosition(position)
-  }, [position])
-
+ 
   useEffect(() => {
     setLetterAccuracy(accuracy)
   }, [accuracy])
@@ -33,10 +29,10 @@ export const Letter = ({position, value, accuracy}:ILetterProps) => {
   
 
    return (
-     <StyledLetterButton accuracy={letterAccuracy}>
+     <StyledVirtualKeyButton accuracy={letterAccuracy} onClick={() => onClickedKey(letterValue)}>
          {letterValue}
-     </StyledLetterButton>
+     </StyledVirtualKeyButton>
    )
 }
 
-export default Letter
+export default VirtualKey

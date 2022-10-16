@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { AccuracyEnum, accuracyColorMap } from '.'
+import { accuracyColorMap, AccuracyEnum } from '../../utilities/accuracy.utils'
+
 
 
 

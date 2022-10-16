@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
+import { VirtualKeyboard } from './component/VirtualKeyboard'
 import { WordBoard } from './component/WordBoard'
 import { WordEntry } from './component/WordEntry'
 import { StyledGameOverDisplay } from './component/WordEntry/index.style'
@@ -23,6 +24,23 @@ function App() {
     setNextGuessPosition(nextGuessPosition + 1)   
   }
 
+  const handleOnClickedKey = (key: string): void => {
+    if (key.toLowerCase() === 'backspace') {
+      if (wordGuess.length !== 0) {
+        setWordGuess(wordGuess.substring(0, wordGuess.length - 1))
+      }
+    }
+    else if (key.toLowerCase() === 'enter') {
+      handleGuessCompletion(wordGuess)    
+    } 
+    else {
+      if (wordGuess.length < 5) {
+        setWordGuess(wordGuess + key)
+      }
+
+    }
+  }
+
 
   useEffect(() => {
     if (winning != null){    
@@ -41,7 +59,12 @@ function App() {
   useEffect (() => {
     if (nextGuessPosition === 6) {
       setWinning(false)
+      return
     }
+
+    if (gameOver === true) return
+    
+    setWordGuess('')
   }, [nextGuessPosition])
  
   return (
@@ -50,7 +73,8 @@ function App() {
       <WordEntry onGuessEntered={(guess) => setWordGuess(guess)} 
               onGuessComplete={() => handleGuessCompletion(wordGuess)}  />
       }
-      <WordBoard guess={wordGuess} currentPosition={nextGuessPosition}  />
+      <WordBoard guess={wordGuess} currentPosition={nextGuessPosition}  />      
+      <VirtualKeyboard onClickedKey={handleOnClickedKey} />
     </div>
   )
 }

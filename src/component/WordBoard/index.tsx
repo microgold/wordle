@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Word } from "../Word"
+import { StyledWordBoard } from "./index.style"
 
 interface IWordBoardProps {
     guess : string
@@ -46,14 +47,14 @@ export const WordBoard = ({guess, currentPosition}:IWordBoardProps) => {
     , [currentPosition])
 
     return (
-        <>
+        <StyledWordBoard>
         {
              wordGuesses.map((wordGuess: IGuess, index: number) => {
                 return <Word key={`guesses_${index}`} isWordEvaluated={wordGuess.evaluated} guessWordValue={wordGuess.guessedWord}  />
              })
 
         }
-        </>
+        </StyledWordBoard>
     )
 
 }

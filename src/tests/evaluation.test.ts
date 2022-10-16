@@ -1,4 +1,5 @@
-import { AccuracyEnum } from "../component/Letter"
+
+import { AccuracyEnum } from "../utilities/accuracy.utils"
 import { evaluateWordScore } from "../utilities/Evaluation"
 
 test('evaluate wordle all correct', () => {
