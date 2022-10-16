@@ -18,7 +18,20 @@ export  const calculateLetterAccuracyMap = (words: string[]): Map<string, Accura
             return  {letter: word[scoreIndex], accuracy: score}
         })
 
-        combinedResults.map(result => accuracyMap.set(result.letter, result.accuracy))
+        combinedResults.map((result)  =>  
+                {
+                    // handle case where its already marked in the 
+                    // map from another letter
+                    if (accuracyMap.has(result.letter)) {
+                        const currentAccuracy = accuracyMap.get(result.letter)
+                        if (Number(currentAccuracy) > Number(result.accuracy)) {
+                            accuracyMap.set(result.letter, result.accuracy)
+                        }                      
+                    }
+                    else {
+                        accuracyMap.set(result.letter, result.accuracy)
+                    }
+                })
     })
 
     return accuracyMap
