@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react"
+import { IGuess } from "../../utilities/guess.model"
 import { Word } from "../Word"
 import { StyledWordBoard } from "./index.style"
 
 interface IWordBoardProps {
     guess : string
     currentPosition: number,
+    wordGuessesCallback(guesses: IGuess[]) : void
 }
 
-interface IGuess {
-    guessedWord: string,
-    evaluated: boolean
-}
 
-export const WordBoard = ({guess, currentPosition}:IWordBoardProps) => {
+
+export const WordBoard = ({guess, currentPosition, wordGuessesCallback}:IWordBoardProps) => {
 
     const initialGuessState : IGuess[] = [
         { guessedWord: '', evaluated: false },
@@ -30,7 +29,7 @@ export const WordBoard = ({guess, currentPosition}:IWordBoardProps) => {
         if (currentWordIndex > 5) return
         const currentGuess: IGuess = {guessedWord: guess, evaluated: false}
         const updatedGuesses: IGuess[] =  [...wordGuesses.slice(0, currentWordIndex), currentGuess, ...wordGuesses.slice(currentWordIndex + 1)]
-        setWordGuesses(updatedGuesses)
+        setWordGuesses(updatedGuesses)       
     }, [guess])
 
     useEffect(() => 
@@ -43,6 +42,7 @@ export const WordBoard = ({guess, currentPosition}:IWordBoardProps) => {
         console.log('updating guesses...')
         setWordGuesses(updatedGuesses)
         setCurrentWordIndex(currentPosition)
+        wordGuessesCallback(updatedGuesses)
     }
     , [currentPosition])
 

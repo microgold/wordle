@@ -1,4 +1,29 @@
+import { retrieveAnswer } from './answerRetriever';
 import { AccuracyEnum } from "./accuracy.utils"
+
+export interface ILetterScorePair {
+    letter: string
+    accuracy: AccuracyEnum
+}
+
+export  const calculateLetterAccuracyMap = (words: string[]): Map<string, AccuracyEnum> => {
+
+    const accuracyMap = new Map<string, AccuracyEnum>()
+    
+
+        words.forEach(word => {
+            const scoringResults = evaluateWordScore(word, retrieveAnswer().toUpperCase())
+
+        const combinedResults: ILetterScorePair[] = scoringResults.map((score, scoreIndex) => {
+            return  {letter: word[scoreIndex], accuracy: score}
+        })
+
+        combinedResults.map(result => accuracyMap.set(result.letter, result.accuracy))
+    })
+
+    return accuracyMap
+
+}
 
 
 const replaceAt = (source: string, index: number, replacement: string) : string => {

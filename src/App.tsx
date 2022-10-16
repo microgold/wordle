@@ -4,15 +4,20 @@ import { VirtualKeyboard } from './component/VirtualKeyboard'
 import { WordBoard } from './component/WordBoard'
 import { WordEntry } from './component/WordEntry'
 import { StyledGameOverDisplay } from './component/WordEntry/index.style'
+import { AccuracyEnum } from './utilities/accuracy.utils'
 import { retrieveAnswer } from './utilities/answerRetriever'
+import { calculateLetterAccuracyMap } from './utilities/Evaluation'
+import { IGuess } from './utilities/guess.model'
 
 function App() {
 
   const [wordGuess, setWordGuess] = useState('')
+  const [wordGuesses, setWordGuesses] = useState<IGuess[]>([])
   const [nextGuessPosition, setNextGuessPosition] = useState(0)
   const [winning, setWinning] = useState<boolean | null>(null)
   const [gameOver, setGameOver] = useState(false)
   const [gameOverText, setGameOverText] = useState('')
+  const [letterScoreMap, setLetterScoreMap] = useState<Map<string, AccuracyEnum>>(new Map<string, AccuracyEnum>())
 
   const handleGuessCompletion = (guess: string): void => {
     // check to see if we won
@@ -23,6 +28,12 @@ function App() {
 
     setNextGuessPosition(nextGuessPosition + 1)   
   }
+
+  const handleWordGuesses = (guesses: IGuess[]) =>  {
+    setWordGuesses(guesses)
+  }
+
+
 
   const handleOnClickedKey = (key: string): void => {
     if (key.toLowerCase() === 'backspace') {
@@ -73,8 +84,8 @@ function App() {
       <WordEntry onGuessEntered={(guess) => setWordGuess(guess)} 
               onGuessComplete={() => handleGuessCompletion(wordGuess)}  />
       }
-      <WordBoard guess={wordGuess} currentPosition={nextGuessPosition}  />      
-      <VirtualKeyboard onClickedKey={handleOnClickedKey} />
+      <WordBoard guess={wordGuess} currentPosition={nextGuessPosition} wordGuessesCallback={handleWordGuesses}  />      
+      <VirtualKeyboard onClickedKey={handleOnClickedKey} wordGuesses = {wordGuesses} />
     </div>
   )
 }
