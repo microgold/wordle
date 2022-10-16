@@ -42,7 +42,7 @@ export const WordBoard = ({guess, currentPosition, wordGuessesCallback}:IWordBoa
         console.log('updating guesses...')
         setWordGuesses(updatedGuesses)
         setCurrentWordIndex(currentPosition)
-        wordGuessesCallback(updatedGuesses)
+        wordGuessesCallback(updatedGuesses.filter(guess => guess.evaluated))
     }
     , [currentPosition])
 

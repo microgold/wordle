@@ -6,7 +6,6 @@ import { WordEntry } from './component/WordEntry'
 import { StyledGameOverDisplay } from './component/WordEntry/index.style'
 import { AccuracyEnum } from './utilities/accuracy.utils'
 import { retrieveAnswer } from './utilities/answerRetriever'
-import { calculateLetterAccuracyMap } from './utilities/Evaluation'
 import { IGuess } from './utilities/guess.model'
 
 function App() {
@@ -17,8 +16,7 @@ function App() {
   const [winning, setWinning] = useState<boolean | null>(null)
   const [gameOver, setGameOver] = useState(false)
   const [gameOverText, setGameOverText] = useState('')
-  const [letterScoreMap, setLetterScoreMap] = useState<Map<string, AccuracyEnum>>(new Map<string, AccuracyEnum>())
-
+  
   const handleGuessCompletion = (guess: string): void => {
     // check to see if we won
     if (wordGuess === retrieveAnswer().toUpperCase()) {
