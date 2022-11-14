@@ -1,18 +1,93 @@
-import React from 'react'
-import logo from './logo.svg'
+import React, { useEffect, useState } from 'react'
 import './App.css'
-import Letter, { AccuracyEnum } from './component/Letter'
+import { VirtualKeyboard } from './component/VirtualKeyboard'
+import { WordBoard } from './component/WordBoard'
+import { WordEntry } from './component/WordEntry'
+import { StyledGameOverDisplay } from './component/WordEntry/index.style'
+import { AccuracyEnum } from './utilities/accuracy.utils'
+import { retrieveAnswer } from './utilities/answerRetriever'
+import { IGuess } from './utilities/guess.model'
 
 function App() {
+
+  const [wordGuess, setWordGuess] = useState('')
+  const [wordGuesses, setWordGuesses] = useState<IGuess[]>([])
+  const [nextGuessPosition, setNextGuessPosition] = useState(0)
+  const [winning, setWinning] = useState<boolean | null>(null)
+  const [gameOver, setGameOver] = useState(false)
+  const [gameOverText, setGameOverText] = useState('')
+  
+  const handleGuessCompletion = (guess: string): void => {
+    // check to see if we won
+    if (wordGuess === retrieveAnswer().toUpperCase()) {
+      setWinning(true)
+      return
+    }
+
+    setNextGuessPosition(nextGuessPosition + 1)   
+  }
+
+  const handleWordGuesses = (guesses: IGuess[]) =>  {
+    setWordGuesses(guesses)
+  }
+
+
+
+  const handleOnClickedKey = (key: string): void => {
+    if (key.toLowerCase() === 'backspace') {
+      if (wordGuess.length !== 0) {
+        setWordGuess(wordGuess.substring(0, wordGuess.length - 1))
+      }
+    }
+    else if (key.toLowerCase() === 'enter' && wordGuess.length === 5) {
+      handleGuessCompletion(wordGuess)    
+    } 
+    else {
+      if (wordGuess.length < 5) {
+        setWordGuess(wordGuess + key)
+      }
+
+    }
+  }
+
+
+  useEffect(() => {
+    if (winning != null){    
+    setNextGuessPosition(0) // force it to evaluate the current word
+    setGameOver(true)
+   }
+  
+    if (winning) {
+      setGameOverText('You Won!!')      
+    }
+    else if (winning === false) {
+      setGameOverText(`Word: ${retrieveAnswer().toUpperCase()}`) // game is over
+    }
+  }, [winning])
+
+  useEffect (() => {
+    if (nextGuessPosition === 6) {
+      setWinning(false)
+      return
+    }
+
+    if (gameOver === true) return
+
+    setWordGuess('')
+  }, [nextGuessPosition])
+ 
   return (
-    <div>
-      <Letter accuracy={AccuracyEnum.correct} position={0} value='R' />
-      <Letter accuracy={AccuracyEnum.doesNotExist} position={1} value='E' />
-      <Letter accuracy={AccuracyEnum.wrongPosition} position={2} value='A' />
-      <Letter accuracy={AccuracyEnum.wrongPosition} position={2} value='C' />
-      <Letter accuracy={AccuracyEnum.correct} position={2} value='T' />
+    <div className='App-board'>
+      { gameOver ? <StyledGameOverDisplay>{gameOverText}</StyledGameOverDisplay> :
+      <WordEntry onGuessEntered={(guess) => setWordGuess(guess)} 
+              onGuessComplete={() => handleGuessCompletion(wordGuess)}  />
+      }
+      <WordBoard guess={wordGuess} currentPosition={nextGuessPosition} wordGuessesCallback={handleWordGuesses}  />      
+      <VirtualKeyboard onClickedKey={handleOnClickedKey} wordGuesses = {wordGuesses} />
     </div>
   )
 }
 
 export default App
+
+

@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.App-board {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 5px; 
+  background: black;
+  height: 700px;
+  width:  950px;
+  justify-content: center;
+  align-items: center;
+}

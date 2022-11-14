@@ -1,22 +1,8 @@
-import { useState } from "react"
-import { StyledLetterButton } from "./index.style"
+import { useEffect, useState } from "react"
+import { AccuracyEnum } from "../../utilities/accuracy.utils"
+import { StyledBlankButton, StyledLetterButton } from "./index.style"
 
 
-export enum AccuracyEnum {
-    correct,
-    wrongPosition,
-    doesNotExist,
-    None
-}
-
-export const accuracyColorMap = new Map<AccuracyEnum, string>(
-    [
-      [AccuracyEnum.correct, '#6CA965'],
-      [AccuracyEnum.wrongPosition, '#C8B653'],
-      [AccuracyEnum.None, 'black'],
-      [AccuracyEnum.doesNotExist, '#787C7F']
-    ]
-  )    
 
 
 export interface ILetterProps {
@@ -28,12 +14,30 @@ export interface ILetterProps {
 
 
 export const Letter = ({position, value, accuracy}:ILetterProps) => {
- 
+
+   const [letterPosition, setLetterPosition] = useState(0)
+   const [letterValue, setLetterValue] = useState('')
+   const [letterAccuracy, setLetterAccuracy] = useState(AccuracyEnum.none)
+
+   useEffect(() => {
+    setLetterValue(value)
+  }, [value])
+
+  useEffect(() => {
+    setLetterPosition(position)
+  }, [position])
+
+  useEffect(() => {
+    setLetterAccuracy(accuracy)
+  }, [accuracy])
+  
+  
 
    return (
-  <StyledLetterButton accuracy={accuracy}>
-        {value}
-  </StyledLetterButton>
+      (letterValue === '_' ? <StyledBlankButton>'_'</StyledBlankButton> :
+     <StyledLetterButton accuracy={letterAccuracy}>
+         {letterValue}
+     </StyledLetterButton>)
 
    )
 }
