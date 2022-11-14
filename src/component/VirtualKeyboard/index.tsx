@@ -11,13 +11,6 @@ export interface IVirtualKeyboardProps {
     wordGuesses : IGuess[]
 }
 
-interface IVirtualKey {
-    name: string,
-    accuracy: AccuracyEnum
-}
-
-
-
 
 export const VirtualKeyboard = ({onClickedKey, wordGuesses}:IVirtualKeyboardProps) => {
 
@@ -30,7 +23,7 @@ export const VirtualKeyboard = ({onClickedKey, wordGuesses}:IVirtualKeyboardProp
 
 
 
-    const calculateLetterAccuracy = (letter: string) : AccuracyEnum => {
+    const lookupLetterAccuracy = (letter: string) : AccuracyEnum => {
         if (letterScoreMap.has(letter)) {
             return letterScoreMap.get(letter) ?? AccuracyEnum.none
         }
@@ -86,17 +79,17 @@ export const VirtualKeyboard = ({onClickedKey, wordGuesses}:IVirtualKeyboardProp
         <StyledKeyboardRow>
             {firstRow.map(virtualkey => {
             return (
-            <VirtualKey value={virtualkey} accuracy={calculateLetterAccuracy(virtualkey)} onClickedKey={onClickedKey}></VirtualKey>)})}
+            <VirtualKey value={virtualkey} accuracy={lookupLetterAccuracy(virtualkey)} onClickedKey={onClickedKey}></VirtualKey>)})}
         </StyledKeyboardRow>
         <StyledKeyboardRow>
             {secondRow.map(virtualkey => {
             return (
-            <VirtualKey value={virtualkey} accuracy={calculateLetterAccuracy(virtualkey)} onClickedKey={onClickedKey}></VirtualKey>)})}
+            <VirtualKey value={virtualkey} accuracy={lookupLetterAccuracy(virtualkey)} onClickedKey={onClickedKey}></VirtualKey>)})}
         </StyledKeyboardRow>
         <StyledKeyboardRow>
             {thirdRow.map(virtualkey => {
             return (
-            <VirtualKey value={virtualkey} accuracy={calculateLetterAccuracy(virtualkey)} onClickedKey={onClickedKey}></VirtualKey>)})}
+            <VirtualKey value={virtualkey} accuracy={lookupLetterAccuracy(virtualkey)} onClickedKey={onClickedKey}></VirtualKey>)})}
         </StyledKeyboardRow>
     </StyleKeyboardContainer>
   )
